@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot : MonoBehaviour
+public class CreateBGM : MonoBehaviour
 {
-    //ゲームオブジェクトをインスペクターから参照するための変数
-    public GameObject Bullet;
-
     // Start is called before the first frame update
+
+    public AudioSource audio;
+
     void Start()
     {
         
@@ -18,8 +18,8 @@ public class Shot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //弾を生成する
-            Instantiate(Bullet, transform.position, Quaternion.identity);
+            audio.Play();
         }
+
     }
 }

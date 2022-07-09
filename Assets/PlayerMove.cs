@@ -11,9 +11,13 @@ public class PlayerMove : MonoBehaviour
     //子オブジェクトのサイズを入れるための変数
     private float Left, Right, Top, Bottom;
 
+    public GameObject shiftText;
+
     // Start is called before the first frame update
     void Start()
     {
+        shiftText.SetActive(false);
+
         //カメラとプレイヤーの距離を測る(表示画面の四隅を設定)
         var distance = Vector3.Distance(Camera.main.transform.position, transform.position);
 
@@ -50,7 +54,6 @@ public class PlayerMove : MonoBehaviour
                 Bottom = child.transform.position.z;
             }
         }
-
     }
 
     // Update is called once per frame
@@ -59,30 +62,72 @@ public class PlayerMove : MonoBehaviour
         //プレイヤーの移動処理
         Vector3 pos = transform.position;
 
+        shiftText.SetActive(false);
+
         //右矢印キーが入力されたとき
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftShift))
         {
-            //右方向に0.05動く
-            pos.x += 0.05f;
+            //右方向に0.1動く
+            pos.x += 0.1f;
+
+            shiftText.SetActive(true);
         }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            //右方向に0.5動く
+            pos.x += 0.5f;
+
+            shiftText.SetActive(false);
+        }
+
         //左矢印キーが入力されたとき
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.LeftShift))
         {
-            //左方向に0.05動く
-            pos.x -= 0.05f;
+            //左方向に0.1動く
+            pos.x -= 0.1f;
+
+            shiftText.SetActive(true);
         }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            //左方向に0.5動く
+            pos.x -= 0.5f;
+
+            shiftText.SetActive(false);
+        }
+
         //上矢印キーが入力されたとき
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
         {
-            //上方向に0.05動く
-            pos.z += 0.05f;
+            //上方向に0.1動く
+            pos.z += 0.1f;
+
+            shiftText.SetActive(true);
         }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            //上方向に0.5動く
+            pos.z += 0.5f;
+
+            shiftText.SetActive(false);
+        }
+
         //下矢印キーが入力されたとき
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftShift))
         {
-            //下方向に0.05動く
-            pos.z -= 0.05f;
+            //下方向に0.1動く
+            pos.z -= 0.1f;
+
+            shiftText.SetActive(true);
         }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            //下方向に0.5動く
+            pos.z -= 0.5f;
+
+            shiftText.SetActive(false);
+        }
+
         transform.position = new Vector3(
             Mathf.Clamp(pos.x, LeftBottom.x + transform.localScale.x - Left, RightTop.x - transform.localScale.x - Right),
             pos.y,

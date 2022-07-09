@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Enemy‚Ì‘Ì—Í—p•Ï”
-    private int enemyhp;
+    public int enemyhp;
+
     // Start is called before the first frame update
     void Start()
     {
